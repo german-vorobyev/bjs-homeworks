@@ -13,16 +13,14 @@ function averageMark(a, g, p) {
 
 	return (algebra + geography + physics) / averageMark.length;
 }
-let averageScore = averageMark(3,4,5);
 
 function sayHello(userName) {
 	
     let myName = userName;
-	let message = 'Привет, мир! Меня зовут ' + `${myName}`;
+	let message = `Привет, мир! Меня зовут ${myName}`;
 	
 	return message;
 }
-sayHello('Иван');
 
 function calculateFormula() {
     
@@ -32,4 +30,3 @@ function calculateFormula() {
     
     return x * y + 5 * z + x - 1;
 }
-let result = calculateFormula();
