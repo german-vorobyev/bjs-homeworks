@@ -26,33 +26,33 @@ class PrintEditionItem {
     } 
 }
 class Magazine extends PrintEditionItem {
-    constructor(name, releaseDate, pagesCount, state) {
-        super(name, releaseDate, pagesCount, state);
+    constructor(name, releaseDate, pagesCount) {
+        super(name, releaseDate, pagesCount);
         this.type = "magazine";
     }
 }
 class Book extends PrintEditionItem {
-    constructor(author, name, releaseDate, pagesCount, state) {
-        super(author, name, releaseDate, pagesCount, state);
+    constructor(author, name, releaseDate, pagesCount) {
+        super(name, releaseDate, pagesCount);
         this.author = author;
         this.type = "book"
     }
 }
 class NovelBook extends Book {
-    constructor(author, name, releaseDate, pagesCount, state) {
-        super(author, name, releaseDate, pagesCount, state);
+    constructor(author, name,releaseDate, pagesCount) {
+        super(author, name, releaseDate, pagesCount);
         this.type = "novel";
     }
 }
 class FantasticBook extends Book {
-    constructor(author, name, releaseDate, pagesCount, state) {
-        super(author, name, releaseDate, pagesCount, state);
+    constructor(author, name,releaseDate, pagesCount) {
+        super(author, name,releaseDate, pagesCount);
         this.type = "fantastic";
     }
 }
 class DetectiveBook extends Book {
-    constructor(author, name, releaseDate, pagesCount, state) {
-        super(author, name, releaseDate, pagesCount, state);
+    constructor(author, name,releaseDate, pagesCount) {
+        super(author, name,releaseDate, pagesCount);
         this.type = "detective";
     }
 }
@@ -71,10 +71,9 @@ class Library {
         for(let i = 0; i <= this.books.length; i++) {
             if (this.books[i][type] === value) {
                 return this.books[i]
-            } else {
-                return null;
             }
         }
+        return null;
     }
     giveBookByName(bookName) {
         let book = this.books.findIndex(itemBooks => itemBooks.name == bookName);
@@ -95,12 +94,22 @@ class StudentLog {
         return this.name;
     }
     addGrade(grade, subject) {
-      this.object.subject = []
+      this.object.subject = [];
        if (grade > 0 && grade < 6) {
-         this.object.subject.push(grade)
+            this.object.subject.push(grade)
         } else {
             console.log(`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`)
         }
-        return this.scores.subject.length
+        return this.object.subject.length;
+    }
+    getAverageBySubject(subject) {
+        if (subject.length === 0) {
+            return 0;
+        }
+        let sum = 0;
+        for (let i = 0; i < subject.length; i++) {
+            sum += subject[i];
+        }
+        return sum / subject.length;
     }
 }
