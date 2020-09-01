@@ -68,7 +68,7 @@ class Library {
         }
     }
     findBookBy(type, value) {
-        for(let i = 0; i <= this.books.length; i++) {
+        for(let i = 0; i < this.books.length; i++) {
             if (this.books[i][type] === value) {
                 return this.books[i]
             }
@@ -94,11 +94,19 @@ class StudentLog {
         return this.name;
     }
     addGrade(grade, subject) {
-      this.object.subject = [];
-       if (grade > 0 && grade < 6) {
+        if (!this.object.subject) {
+          this.object.subject = [];
+          if (grade > 0 && grade < 6) {
             this.object.subject.push(grade)
-        } else {
+          } else {
             console.log(`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`)
+          }
+        } else {
+          if (grade > 0 && grade < 6) {
+            this.object.subject.push(grade)
+          } else {
+            console.log(`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`)
+          }
         }
         return this.object.subject.length;
     }
