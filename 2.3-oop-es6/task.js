@@ -94,30 +94,42 @@ class StudentLog {
         return this.name;
     }
     addGrade(grade, subject) {
-        if (!this.object.subject) {
-          this.object.subject = [];
+        if (!this.object[subject]) {
+          this.object[subject] = [];
           if (grade > 0 && grade < 6) {
-            this.object.subject.push(grade)
+            this.object[subject].push(grade)
           } else {
             console.log(`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`)
           }
         } else {
           if (grade > 0 && grade < 6) {
-            this.object.subject.push(grade)
+            this.object[subject].push(grade)
           } else {
             console.log(`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`)
           }
         }
-        return this.object.subject.length;
+        return this.object[subject].length;
     }
     getAverageBySubject(subject) {
-        if (subject.length === 0) {
+        if (this.object[subject].length === 0) {
             return 0;
         }
         let sum = 0;
-        for (let i = 0; i < subject.length; i++) {
-            sum += subject[i];
+        for (let i = 0; i < this.object[subject].length; i++) {
+            sum += this.object[subject][i];
         }
-        return sum / subject.length;
+        return sum / this.object[subject].length;
+    }
+    getTotalAverage() {
+        let sum = 0;
+        let result;
+        for (let key in this.object) {
+          for(let i = 0; i < this.object[key].length; i++) {
+            sum += this.object[key][i];
+          }
+          let len = this.object[key].length + this.object[key].length;
+          result = sum / len;
+        }
+        return result;
     }
 }
