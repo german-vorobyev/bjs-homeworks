@@ -2,7 +2,7 @@
 class AlarmClock {
     constructor() {
         this.alarmCollection = [];
-        this.timerId;
+        this.timerId = null;
     }
     addClock(time, callback, id) {
         if (!id) {
@@ -38,6 +38,31 @@ class AlarmClock {
         }
     }
     start() {
-        this.timerId = setInterval(() => this.alarmCollection.forEach(clock => checkClock(clock)), 60000);
+        if(!this.timerId) {
+            this.timerId = setInterval(() => this.alarmCollection.forEach(clock => this.checkClock(clock)), 60000);
+        }
+    }
+    stop() {
+        if (this.timerId) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+        }
+    }
+    printAlarms() {
+        this.alarmCollection.forEach(clock => console.log(clock.id, clock.time));
+    }
+    clearAlarms() {
+        this.stop();
+        this.alarmCollection = [];
     }
 }
+
+// let alarmTimer = new AlarmClock();
+// alarmTimer.addClock( '18:11', () => console.log('18:11'), 2);
+// alarmTimer.addClock( '18:15', () => console.log('18:15'), 1);
+// alarmTimer.addClock( '18:21', () => console.log('1'), 1);
+// alarmTimer.addClock( '18:21', () => console.log('2'), 3);
+// alarmTimer.addClock( '18:21', () => console.log('3'), 4);
+// alarmTimer.addClock( '18:21', () => console.log('4'), 5);
+// alarmTimer.removeClock(5);
+// alarmTimer.start();
