@@ -1,4 +1,4 @@
-"use srict"
+"use strict"
 // Задание 1
 class PrintEditionItem {
     constructor(name, releaseDate, pagesCount) {

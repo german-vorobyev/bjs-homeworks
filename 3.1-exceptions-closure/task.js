@@ -1,4 +1,4 @@
-"use srict"
+"use strict"
 // Задание 1
 function parseCount(value) {
     const parsed = Number.parseInt(value);
