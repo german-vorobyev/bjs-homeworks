@@ -31,30 +31,20 @@ function sleep(milliseconds) {
       }, 0);
   }
   function compareArrays(arr1, arr2) {
-    if (arr1.length !== arr2.length) {
-      return false;
-    }
-    for(let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
-        return false;
-      }
-    }
-    return true;
+    return arr1.length === arr2.length && arr1.every((item, i) => item === arr2[i]);
   }
   function memorize(fn, limit) {
     const memory = [];
-    let fn2 = (...args) => {
-      let fil = memory.filter(obj => compareArrays(obj.args, args));
-      if (fil.length > 0) {
-        return fil[0].result ;
-      } else {
-        let res = fn(...args);
-        memory.push({args:args,result:res});
+    return (...args) => {
+      let fil = memory.find(obj => compareArrays(obj.args, args));
+      if (fil) {
+        return fil.result;
+      }
+        let result = fn(...args);
+        memory.push({args,result});
           if (memory.length > limit) {
             memory.shift();
           }
-          return res;
+          return result;
         }
-    }
-    return fn2;
   }
